@@ -28,7 +28,7 @@ Metals are present in our everyday life and geologists try to identify their pro
 
 # Introduction
 
-Lead isotopes are wildly used on sulphides (galena, pyrite, pyrrhotite, sphalerite, chalcopyrite, magnetite, hematite, arsenopyrite…) and whole rock to get information about the model age of the sulphides minerals. For some minerals, this method is the only way to estimate their age. Lead isotopic ratios can be measured by TIMS (acronyme), SIMS (acronyme) or MC-ICP-MS (acronyme). One of the most used method for model age estimations is the one of @Stacey:1975 which implies two stages: in the first one, the mantle evolves until 3.7 Ga, where crust formation leads to a second stage with different parameters. Another method was developed by @Cumming:1975 in which a parameter increases linearly over the history of the Earth. However, this last model is not well appropriate for the Northern part of Australia and @Sun:1996 modified it to better fit the Australian data. This new Python program aims to quickly calculate the model ages thanks to the @Sun:1996 and @Stacey:1975 models as it was designed for Proterozoic samples of the North Australian Craton. However, as the @Sun:1996 model is adapted from the @Cumming:1975 one only by changing one parameter value, this algorithm can be easily used for both models.
+Lead isotopes are wildly used on sulphides (galena, pyrite, pyrrhotite, sphalerite, chalcopyrite, magnetite, hematite, arsenopyrite…) and whole rock to get information about the model age of the sulphides minerals. For some minerals, this method is the only way to estimate their age. Lead isotopic ratios can be measured by TIMS (Thermal Ionization Mass Spectrometry), SIMS (Secondary Ion Mass Spectrometry) or MC-ICP-MS (Multiple Collector – Inductively Coupled Plasma -Mass Spectrometry). One of the most used method for model age estimations is the one of @Stacey:1975 which implies two stages: in the first one, the mantle evolves until 3.7 Ga, where crust formation leads to a second stage with different parameters. Another method was developed by @Cumming:1975 in which a parameter increases linearly over the history of the Earth. However, this last model is not well appropriate for the Northern part of Australia and @Sun:1996 modified it to better fit the Australian data. This new Python program aims to quickly calculate the model ages thanks to the @Sun:1996 and @Stacey:1975 models as it was designed for Proterozoic samples of the North Australian Craton. However, as the @Sun:1996 model is adapted from the @Cumming:1975 one only by changing one parameter value, this algorithm can be easily used for both models.
 
 This program can be used to calculate in a short time lots of model ages and $\mu$ values based on lead isotopes ratios. As an example, it allows the calculation of approximately 500 data in a few seconds, and with different models (two in the proposed program, and the parameters are easy to change for other similar models). The scope of this program in to calculate large sets of data when doing synthesis at regional scale for example.
 
@@ -63,9 +63,6 @@ The unknowns determined by the program are: t (model age of the analysed galena 
 ## Interface
 
 In the interface, the user can specify several parameters that will be used in the calculation. These parameters are the emplacement of the Excelsheet containing the data, which model he wants to use if he wants the graphical representation or not. In addition, the $\mu$ curves for different chosen values could be added to the graphical representation.
- 
-Figure 1: Interface of the FindAge program, with the different fields that have to be filled in by the user.
-
 
 # Lead isotopes evolution models
 
@@ -103,9 +100,9 @@ These systems are solved when $\Delta$$\mu$ = $\mu$$_{206}$ - $\mu$$_{207}$ are 
 
 # Graphical representation
 
-FindAge also provides a graphical representation of the analyses (black dots) as well as the isochrones for two different models [Stacey:1975; Sun:1996]. The isochrons defined in the program are from 0 to 3000 Ma to cover the vast majority of rocks on Earth. Figure 2 presents the results for all the lead isotopes data acquired for the XXX deposit.
-\autoref{fig:2}.
-![Example of diagram provided by the FindAge program, with several isochrons (SK = Stacey and Kramers, 1975 and Sun = Sun et al., 1996). figure.\label{fig:2}](figure2.png)
+FindAge also provides a graphical representation of the analyses (black dots) as well as the isochrones for two different models [Stacey:1975; Sun:1996]. The isochrons defined in the program are from 0 to 3000 Ma to cover the vast majority of rocks on Earth. Figure  \ref{fig:Figure2} presents the results for all the lead isotopes data acquired for the XXX deposit.
+
+![Example of diagram provided by the FindAge program, with several isochrons (SK = Stacey and Kramers, 1975 and Sun = Sun et al., 1996).\label{fig:Figure2}](Figure2.png)
 
 # Acknowledgements
 
