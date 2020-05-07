@@ -63,15 +63,15 @@ Cumming and Richard (1975) and Sun et al. (1996) models
 
 The @Cumming:1975 model is based on the hypothesis of a steady growth in $\mu$ (representing the <sup>238</sup>U/<sup>204</sup>Pb ratio of a given reservoir) through time. Based on the <sup>206</sup>Pb/<sup>204</sup>Pb and <sup>207</sup>Pb/<sup>204</sup>Pb, ratios, it is possible to get the model age of crystallisation of the studied mineral by iteration. In this program, the model used is the one developed by @Sun:1996 for the North Australian Craton, which is the host of the mineralisation studied in this study. The equations in this model are the following ones: 
 
-$(^{206}Pb/^{204}Pb)<sub>t</sub> = A<sub>0</sub> + \mu<sub>206</sub> * (e^{4.509 * \lambda <sub>238</sub>} * (1 - \epsilon * (4.509 - 1/ \lambda <sub>238</sub>)) - e^{t * \lambda <sub>238</sub>} * (1 - \epsilon * (t - 1 / \lambda <sub>238</sub>)))$
+$(^{206}Pb/^{204}Pb)<sub>t</sub> = A<sub>0</sub> + \mu <sub>206</sub> * (e^{4.509 * \lambda <sub>238</sub>} * (1 - \epsilon * (4.509 - 1/ \lambda <sub>238</sub>)) - e^{t * \lambda <sub>238</sub>} * (1 - \epsilon * (t - 1 / \lambda <sub>238</sub>)))$
 
-$\mu$<sub>206</sub> = (((^{206}Pb/^{204}Pb)<sub>t</sub>) - A<sub>0</sub>) / (e^{4.509 * \lambda <sub>238</sub>} * (1 - \epsilon *(4.509 - 1/ \lambda <sub>238</sub>)) - e^{t * \lambda <sub>238</sub>) * (1 - \epsilon * (t - 1/ \lambda <sub>238</sub>)))$
+$ \mu <sub>206</sub> = (((^{206}Pb/^{204}Pb)<sub>t</sub>) - A<sub>0</sub>) / (e^{4.509 * \lambda <sub>238</sub>} * (1 - \epsilon * (4.509 - 1/ \lambda <sub>238</sub>)) - e^{t * \lambda <sub>238</sub>) * (1 - \epsilon * (t - 1/ \lambda <sub>238</sub>)))$
 
 and
 
 $(^{207}Pb/^{204}Pb)<sub>t</sub> = B<sub>0</sub> + \mu <sub>207</sub> / 137.88 * (e^{4.509 * \lambda <sub>235</sub>} * (1 - \epsilon * (4.509 - 1 / \lambda <sub>235</sub>)) - e^{t * \lambda <sub>235</sub>} * (1 - \epsilon * (t - 1/ \lambda <sub>235</sub>)))$
 
-$\mu$<sub>207</sub> = 137.88 * ((^{207}Pb/^{204<}Pb)<sub>t</sub> - B<sub>0</sub>) / (e^{4.509 * \lambda <sub>235</sub>} * (1 - \epsilon * (4.509 - 1/ \lambda <sub>235</sub>)) - e^{t * \lambda <sub>235</sub>} * (1 - \epsilon * (t - 1/ \lambda <sub>235</sub>)))$
+$ \mu <sub>207</sub> = 137.88 * ((^{207}Pb/^{204<}Pb)<sub>t</sub> - B<sub>0</sub>) / (e^{4.509 * \lambda <sub>235</sub>} * (1 - \epsilon * (4.509 - 1/ \lambda <sub>235</sub>)) - e^{t * \lambda <sub>235</sub>} * (1 - \epsilon * (t - 1/ \lambda <sub>235</sub>)))$
 
 These systems are solved when $\Delta$$\mu$ = $\mu$<sub>206</sub>-$\mu$<sub>207</sub> are close to zero, and yields t and $\mu$<sub>206</sub>~$\mu$<sub>207</sub>. @Cumming:1975 have chosen the rate factor $\epsilon$ = 0.050 * 10<sup>-9</sup> yr<sup>-1</sup>. In the @Sun:1996 model, the $\epsilon$ value has been modified, with $\epsilon$ = 0.0833 * 10<sup>-9</sup> yr<sup>-1</sup> to better fit with the Australian data. This parameter can be modified in the program to calculate with one of the two models.
 
@@ -81,13 +81,13 @@ The @Stacey:1975 model implies two stages in Earth’s history: in the first one
 
 $(^{206}Pb/^{204}Pb)<sub>t</sub> = A<sub>0</sub> + \mu <sub>p</sub> * (e^{ \lambda <sub>238</sub> * 4.57} - e^{ \lambda <sub>238</sub> * 3.7}) + \mu <sub>206</sub> * (e^{ \lambda <sub>238</sub> * 3.7} - e^{ \lambda <sub>238</sub> * t})$
 
-$ \mu<sub>206</sub> = ((^{206}Pb/^{204}Pb)<sub>t</sub> - A<sub>0</sub> - \mu <sub>p</sub> * (e^{ \lambda <sub>238</sub> * 4.57} - e^{ \lambda <sub>238</sub> * 3.7})) / (e^{ \lambda <sub>238</sub> * t} - e^{ \lambda <sub>238</sub> * t})$
+$ \mu <sub>206</sub> = ((^{206}Pb/^{204}Pb)<sub>t</sub> - A<sub>0</sub> - \mu <sub>p</sub> * (e^{ \lambda <sub>238</sub> * 4.57} - e^{ \lambda <sub>238</sub> * 3.7})) / (e^{ \lambda <sub>238</sub> * t} - e^{ \lambda <sub>238</sub> * t})$
 
 and
 
 $(^{207}Pb/^{204}Pb)<sub>t</sub> = B<sub>0</sub> + \mu <sub>p</sub> / 137.88 * (e^{ \lambda <sub>235</sub> * 4.57} - e^{ \lambda <sub>235</sub> * 3.7}) + \mu <sub>207</sub> / 137.88 * (e^{ \lambda <sub>235</sub> * 3.7} - e^{ \lambda <sub>235</sub> * t})$
 
-$ \mu<sub>207</sub> = ((^{207}Pb/^{204}Pb)<sub>t</sub> - B<sub>0</sub> - \mu <sub>p</sub> / 137.88 * (e^{ \lambda <sub>235</sub> * 4.57} - e^{ \lambda <sub>235</sub> * 3.7})) * 137.88 / ((e^{ \lambda <sub>235</sub> * 3.7} - e^{ \lambda <sub>235</sub> * t})$
+$ \mu <sub>207</sub> = ((^{207}Pb/^{204}Pb)<sub>t</sub> - B<sub>0</sub> - \mu <sub>p</sub> / 137.88 * (e^{ \lambda <sub>235</sub> * 4.57} - e^{ \lambda <sub>235</sub> * 3.7})) * 137.88 / ((e^{ \lambda <sub>235</sub> * 3.7} - e^{ \lambda <sub>235</sub> * t})$
 
 These systems are solved when $\Delta$$\mu$ = $\mu$<sub>206</sub> - $\mu$<sub>207</sub> are close to zero, and yields t and $\mu$<sub>206</sub>~$\mu$<sub>207</sub>. 
 
