@@ -1,72 +1,28 @@
+---
+title: 'FindAge, a Python program for model ages calculation based on Pb isotopes'
+tags:
+  - Python
+  - Geology
+  - Lead isotopes
+  - Model ages
 
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@JosephineGigon
-Learn Git and GitHub without any code!
+authors:
+  - name: Joséphine Gigon
+    orcid: 0000-0003-0872-7098
+    affiliation: 1
+  - name: Margaux Raguenel
+    affiliation: 2
+affiliations:
+ - name: Laboratoire GeoRessources
+   index: 1
+ - name: Total
+   index: 2
+date: XX May 2020
+bibliography: paper.bib
 
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-JosephineGigon /
-Tests
+---
 
-1
-0
-
-    0
-
-Code
-Issues 0
-Pull requests 0
-Actions
-Projects 0
-Wiki
-Security 0
-Insights
-
-    Settings
-
-Tests/paper.md
-@JosephineGigon JosephineGigon Add files via upload 73fd932 now
-171 lines (125 sloc) 11.6 KB
-title 	tags 	authors 	affiliations 	date 	bibliography
-FindAge, a Python program for model ages calculation based on Pb isotopes
-	
-Python
-	
-Geology
-	
-Lead isotopes
-	
-Model ages
-	
-name 	orcid 	affiliation
-Joséphine Gigon
-	
-0000-0003-0872-7098
-	
-1
-	
-name 	affiliation
-Margaux Raguenel
-	
-2
-	
-name 	index
-Laboratoire GeoRessources
-	
-1
-	
-name 	index
-Total
-	
-2
-	
-XX May 2020
-	
-paper.bib
-Summary
+# Summary
 
 Metals are present in our everyday life and geologists try to identify their provenance. Some minerals contain clues of their history, such as galena, a lead sulphide (PbS). Lead isotopes in lead-rich minerals are one of the tools to determine the number of metal source(s) and their model age(s). FindAge is an iterative Python code that can calculate rapidly different model ages thanks to lead isotope ratios, based on the equations for different lead evolution models. In addition to be compatible with the two most used global models of lead isotope evolution, it also fit to the model developed for XXX Australia. This program is user-friendly thanks to an interface, and can be easily modified by the user for other models that could better suit the studied area. It has already been used in a scientific publication [@Gigon:2020].
 
