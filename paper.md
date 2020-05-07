@@ -34,21 +34,21 @@ This program can be used to calculate in a short time lots of model ages and $\m
 
 # Program
 
-The program takes as input an Excel sheet in .csv with three columns: Sample name, <sup>206</sup>Pb/<sup>204</sup>Pb and <sup>207</sup>Pb/<sup>204</sup>Pb ratios. The output is an Excel sheet in .csv with nine columns: Sample name, calculated age with the @Sun:1996 model in Ga, $\mu$<sub>206</sub>=<sup>238</sup>U/<sup>204</sup>Pb ratio for the <sup>206</sup>Pb decay chain in the @Sun:1996 model, $\mu$<sub>207</sub>=<sup>238</sup>U/<sup>204</sup>Pb ratio for the <sup>207</sup>Pb decay chain in the @Sun:1996 model, $\Delta$$\mu$ =$\mu$<sub>206</sub>-$\mu$<sub>207</sub> in the @Sun:1996 model, and the same parameters for the @Stacey:1975 model.
+The program takes as input an Excel sheet in .csv with three columns: Sample name, $^{206}$Pb/$^{204}$Pb and $^{207}$Pb/$^{204}$Pb ratios. The output is an Excel sheet in .csv with nine columns: Sample name, calculated age with the @Sun:1996 model in Ga, $\mu$$_{206}$=$^{238}$/$^{204}$Pb ratio for the $^{206}$Pb decay chain in the @Sun:1996 model, $\mu$$_{207}$=$^{238}$U/$^{204}$Pb ratio for the $^{207}$Pb decay chain in the @Sun:1996 model, $\Delta$$\mu$ =$\mu$$_{206}$-$\mu$$_{207}$ in the @Sun:1996 model, and the same parameters for the @Stacey:1975 model.
 
 Constants and unknowns
 
 The program works with the following constants: 
-A<sub>0</sub> = (<sup>206</sup>Pb/<sup>204</sup>Pb)<sub>t0</sub>= 9.307 [@Tatsumoto:1973]
-B<sub>0</sub> = (<sup>207</sup>Pb/<sup>204</sup>Pb)<sub>t0</sub>= 10.294 [@Tatsumoto:1973]
+A$_{0}$ = ($^{206}$Pb/$^{204}$Pb)$_{t0}$= 9.307 [@Tatsumoto:1973]
+B$_{0}$ = ($^{207}$Pb/$^{204}$Pb)$_{t0}$= 10.294 [@Tatsumoto:1973]
 $\epsilon$ = 0.0833 (rate factor, [@Sun:1996])
-$\lambda$<sub>238</sub> = 0.155125 * 10<sup>-9</sup> yr<sup>-1</sup> is the decay constant of <sup>238</sup>U
-$\lambda$<sub>235</sub> = 0.98485 * 10<sup>-9</sup> yr<sup>-1</sup> is the decay constant of <sup>235</sup>U 
-$\mu$<sub>p</sub> = 7.192 is the <sup>238</sup>U/<sup>204</sup>Pb ratio of the Mantle [@Tatsumoto:1973]
-(<sup>206</sup>Pb/<sup>204</sup>Pb)<sub>t</sub> is the measured <sup>206</sup>Pb/<sup>204</sup>Pb ratio
-(<sup>207</sup>Pb/<sup>204</sup>Pb)<sub>t</sub> is the measured <sup>207</sup>Pb/<sup>204</sup>Pb ratio
-The 1/137.88 ratio corresponds to the <sup>235</sup>U/<sup>238</sup>U ratio, known to be constant for all U of normal isotopic composition in the Earth at the present time [@Halla:2018]. 
-The unknowns determined by the program are: t (model age of the analysed galena or sulphide) and the $\mu$ value at that time that is found when $\mu$<sub>206</sub> = $\mu$<sub>207</sub>, both parameters for the two proposed models. 
+$\lambda$$_{238}$ = 0.155125 * 10$^{-9}$ yr$^{-1}$ is the decay constant of $^{238}$U
+$\lambda$$_{235}$ = 0.98485 * 10$^{-9}$ yr$^{-1}$ is the decay constant of $^{235}$U 
+$\mu$$_{p}$ = 7.192 is the $^{238}$U/$^{204}$Pb ratio of the Mantle [@Tatsumoto:1973]
+($^{206}$Pb/$^{204}$Pb)$_{t}$ is the measured $^{206}$Pb/$^{204}$Pb ratio
+($^{207}$Pb/$^{204}$Pb)$_{t}$ is the measured $^{207}$Pb/$^{204}$Pb ratio
+The 1/137.88 ratio corresponds to the $^{235}$U/$^{238}$U ratio, known to be constant for all U of normal isotopic composition in the Earth at the present time [@Halla:2018]. 
+The unknowns determined by the program are: t (model age of the analysed galena or sulphide) and the $\mu$ value at that time that is found when $\mu$$_{206}$ = $\mu$$_{207}$, both parameters for the two proposed models. 
 
 Interface
 
@@ -61,7 +61,7 @@ Figure 1: Interface of the FindAge program, with the different fields that have 
 
 Cumming and Richard (1975) and Sun et al. (1996) models 
 
-The @Cumming:1975 model is based on the hypothesis of a steady growth in $\mu$ (representing the <sup>238</sup>U/<sup>204</sup>Pb ratio of a given reservoir) through time. Based on the <sup>206</sup>Pb/<sup>204</sup>Pb and <sup>207</sup>Pb/<sup>204</sup>Pb, ratios, it is possible to get the model age of crystallisation of the studied mineral by iteration. In this program, the model used is the one developed by @Sun:1996 for the North Australian Craton, which is the host of the mineralisation studied in this study. The equations in this model are the following ones: 
+The @Cumming:1975 model is based on the hypothesis of a steady growth in $\mu$ (representing the $^{238}$U/$^{204}$Pb ratio of a given reservoir) through time. Based on the $^{206}$Pb/$^{204}$Pb and $^{207}$Pb/$^{204}$Pb, ratios, it is possible to get the model age of crystallisation of the studied mineral by iteration. In this program, the model used is the one developed by @Sun:1996 for the North Australian Craton, which is the host of the mineralisation studied in this study. The equations in this model are the following ones: 
 
 $(^{206}Pb/^{204}Pb)_{t} = A_{0} + \mu _{206} * (e^{4.509 * \lambda _{238}} * (1 - \epsilon * (4.509 - 1/ \lambda _{238})) - e^{t * \lambda _{238}} * (1 - \epsilon * (t - 1 / \lambda _{238})))$
 
@@ -73,7 +73,7 @@ $(^{207}Pb/^{204}Pb)_{t} = B_{0} + \mu _{207} / 137.88 * (e^{4.509 * \lambda _{2
 
 $\mu _{207} = 137.88 * ((^{207}Pb/^{204}Pb)_{t} - B_{0}) / (e^{4.509 * \lambda _{235}} * (1 - \epsilon * (4.509 - 1/ \lambda _{235})) - e^{t * \lambda _{235}} * (1 - \epsilon * (t - 1/ \lambda _{235})))$
 
-These systems are solved when $\Delta$$\mu$ = $\mu$<sub>206</sub>-$\mu$<sub>207</sub> are close to zero, and yields t and $\mu$<sub>206</sub>~$\mu$<sub>207</sub>. @Cumming:1975 have chosen the rate factor $\epsilon$ = 0.050 * 10<sup>-9</sup> yr<sup>-1</sup>. In the @Sun:1996 model, the $\epsilon$ value has been modified, with $\epsilon$ = 0.0833 * 10<sup>-9</sup> yr<sup>-1</sup> to better fit with the Australian data. This parameter can be modified in the program to calculate with one of the two models.
+These systems are solved when $\Delta$$\mu$ = $\mu$$_{206}$-$\mu$$_{207}$ are close to zero, and yields t and $\mu$$_{206}$~$\mu$$_{207}$. @Cumming:1975 have chosen the rate factor $\epsilon$ = 0.050 * 10$^{-9}$ yr$^{-1}$. In the @Sun:1996 model, the $\epsilon$ value has been modified, with $\epsilon$ = 0.0833 * 10$^{-9}$ yr$^{-1}$ to better fit with the Australian data. This parameter can be modified in the program to calculate with one of the two models.
 
 Stacey and Kramers (1975) model
 
@@ -89,7 +89,7 @@ $(^{207}Pb/^{204}Pb)_{t} = B_{0} + \mu _ {p} / 137.88 * (e^{ \lambda _{235} * 4.
 
 $\mu _{207} = ((^{207}Pb/^{204}Pb)_{t} - B_{0} - \mu _{p} / 137.88 * (e^{ \lambda _{235} * 4.57} - e^{ \lambda _{235} * 3.7})) * 137.88 / ((e^{ \lambda _{235} * 3.7} - e^{ \lambda _{235} * t})$
 
-These systems are solved when $\Delta$$\mu$ = $\mu$<sub>206</sub> - $\mu$<sub>207</sub> are close to zero, and yields t and $\mu$<sub>206</sub>~$\mu$<sub>207</sub>. 
+These systems are solved when $\Delta$$\mu$ = $\mu$$_{206}$ - $\mu$$_{207}$ are close to zero, and yields t and $\mu$$_{206}$~$\mu$$_{207}$. 
 
 # Graphical representation
 
