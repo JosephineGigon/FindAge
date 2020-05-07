@@ -48,7 +48,7 @@ $\mu$<sub>p</sub> = 7.192 is the <sup>238</sup>U/<sup>204</sup>Pb ratio of the M
 (<sup>206</sup>Pb/<sup>204</sup>Pb)<sub>t</sub> is the measured <sup>206</sup>Pb/<sup>204</sup>Pb ratio
 (<sup>207</sup>Pb/<sup>204</sup>Pb)<sub>t</sub> is the measured <sup>207</sup>Pb/<sup>204</sup>Pb ratio
 The 1/137.88 ratio corresponds to the <sup>235</sup>U/<sup>238</sup>U ratio, known to be constant for all U of normal isotopic composition in the Earth at the present time [@Halla:2018]. 
-The unknowns determined by the program are: t (model age of the analysed galena or sulphide) and the $\mu$ value at that time that is found when $\mu$<sub>206</sub> = $\$mu<sub>207</sub>, both parameters for the two proposed models. 
+The unknowns determined by the program are: t (model age of the analysed galena or sulphide) and the $\mu$ value at that time that is found when $\mu$<sub>206</sub> = $\mu$<sub>207</sub>, both parameters for the two proposed models. 
 
 Interface
 
