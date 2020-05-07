@@ -65,7 +65,7 @@ The @Cumming:1975 model is based on the hypothesis of a steady growth in $\mu$ (
 
 $(^{206}Pb/^{204}Pb)_{t} = A_{0} + \mu _{206} * (e^{4.509 * \lambda _{238}} * (1 - \epsilon * (4.509 - 1/ \lambda _{238})) - e^{t * \lambda _{238}} * (1 - \epsilon * (t - 1 / \lambda _{238})))$
 
-$\mu _{206}> = (((^{206}Pb/^{204}Pb)_{t}) - A_{0}) / (e^{4.509 * \lambda _{238}} * (1 - \epsilon * (4.509 - 1/ \lambda _{238})) - e^{t * \lambda _{238}}) * (1 - \epsilon * (t - 1/ \lambda _{238})))$
+$\mu _{206} = (((^{206}Pb/^{204}Pb)_{t}) - A_{0}) / (e^{4.509 * \lambda _{238}} * (1 - \epsilon * (4.509 - 1/ \lambda _{238})) - e^{t * \lambda _{238}}) * (1 - \epsilon * (t - 1/ \lambda _{238})))$
 
 and
 
