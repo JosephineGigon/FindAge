@@ -34,13 +34,13 @@ This program can be used to calculate in a short time lots of model ages and $\m
 
 # Program
 
-The program takes as input an Excel sheet in .csv with three columns: Sample name, $^{206}$Pb/$^{204}$Pb and $^{207}$Pb/$^{204}$Pb ratios. The output is an Excel sheet in .csv with nine columns: Sample name, calculated age with the @Sun:1996 model in Ga, $\mu$$_{206}$=$^{238}$/$^{204}$Pb ratio for the $^{206}$Pb decay chain in the @Sun:1996 model, $\mu$$_{207}$=$^{238}$U/$^{204}$Pb ratio for the $^{207}$Pb decay chain in the @Sun:1996 model, $\Delta$$\mu$ =$\mu$$_{206}$-$\mu$$_{207}$ in the @Sun:1996 model, and the same parameters for the @Stacey:1975 model.
+The program takes as input an Excel sheet in .csv with three columns: Sample name, $^{206}$Pb/$^{204}$Pb and $^{207}$Pb/$^{204}$Pb ratios. The output is an Excel sheet in .csv with nine columns: Sample name, calculated age with the @Sun:1996 model in Ga, $\mu$$_{206}$=$^{238}$U/$^{204}$Pb ratio for the $^{206}$Pb decay chain in the @Sun:1996 model, $\mu$$_{207}$=$^{238}$U/$^{204}$Pb ratio for the $^{207}$Pb decay chain in the @Sun:1996 model, $\Delta$$\mu$ =$\mu$$_{206}$-$\mu$$_{207}$ in the @Sun:1996 model, and the same parameters for the @Stacey:1975 model.
 
 Constants and unknowns
 
 The program works with the following constants: 
-A$_{0}$ = ($^{206}$Pb/$^{204}$Pb)$_{t0}$= 9.307 [@Tatsumoto:1973]
-B$_{0}$ = ($^{207}$Pb/$^{204}$Pb)$_{t0}$= 10.294 [@Tatsumoto:1973]
+A$_{0}$ = ($^{206}$Pb/$^{204}$Pb)$_{t0}$= 9.307 [@Tatsumoto:1973];
+B$_{0}$ = ($^{207}$Pb/$^{204}$Pb)$_{t0}$= 10.294 [@Tatsumoto:1973].
 $\epsilon$ = 0.0833 (rate factor, [@Sun:1996])
 $\lambda$$_{238}$ = 0.155125 * 10$^{-9}$ yr$^{-1}$ is the decay constant of $^{238}$U
 $\lambda$$_{235}$ = 0.98485 * 10$^{-9}$ yr$^{-1}$ is the decay constant of $^{235}$U 
