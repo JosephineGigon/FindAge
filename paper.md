@@ -85,9 +85,9 @@ $ \mu _{206} = ((^{206}Pb/^{204}Pb)_{t} - A_{0} - \mu _{p} * (e^{ \lambda _{238}
 
 and
 
-$(^{207}Pb/^{204}Pb)_{t} = B_{0} + \mu _ {p} / 137.88 * (e^{ \lambda <sub>235</sub> * 4.57} - e^{ \lambda <sub>235</sub> * 3.7}) + \mu <sub>207</sub> / 137.88 * (e^{ \lambda <sub>235</sub> * 3.7} - e^{ \lambda <sub>235</sub> * t})$
+$(^{207}Pb/^{204}Pb)_{t} = B_{0} + \mu _ {p} / 137.88 * (e^{ \lambda _{235} * 4.57} - e^{ \lambda _{235} * 3.7}) + \mu _{207} / 137.88 * (e^{ \lambda _{235} * 3.7} - e^{ \lambda _{235} * t})$
 
-$ \mu <sub>207</sub> = ((^{207}Pb/^{204}Pb)<sub>t</sub> - B<sub>0</sub> - \mu <sub>p</sub> / 137.88 * (e^{ \lambda <sub>235</sub> * 4.57} - e^{ \lambda <sub>235</sub> * 3.7})) * 137.88 / ((e^{ \lambda <sub>235</sub> * 3.7} - e^{ \lambda <sub>235</sub> * t})$
+$ \mu _{207} = ((^{207}Pb/^{204}Pb)_{t} - B_{0} - \mu _{p} / 137.88 * (e^{ \lambda _{235} * 4.57} - e^{ \lambda _{235} * 3.7})) * 137.88 / ((e^{ \lambda _{235} * 3.7} - e^{ \lambda _{235} * t})$
 
 These systems are solved when $\Delta$$\mu$ = $\mu$<sub>206</sub> - $\mu$<sub>207</sub> are close to zero, and yields t and $\mu$<sub>206</sub>~$\mu$<sub>207</sub>. 
 
