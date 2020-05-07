@@ -6,8 +6,6 @@ tags:
   - Lead isotopes
   - Model ages
 
-α
-
 authors:
   - name: Joséphine Gigon
     orcid: 0000-0003-0872-7098
