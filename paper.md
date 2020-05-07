@@ -28,9 +28,7 @@ Metals are present in our everyday life and geologists try to identify their pro
 
 # Introduction
 
-Lead isotopes are wildly used on sulphides (galena, pyrite, pyrrhotite, sphalerite, chalcopyrite, magnetite, hematite, arsenopyrite…) and whole rock to get information about the model age of the sulphides minerals. For some minerals, this method is the only way to estimate their age. Lead isotopic ratios can be measured by TIMS (Thermal Ionization Mass Spectrometry), SIMS (Secondary Ion Mass Spectrometry) or MC-ICP-MS (Multiple Collector – Inductively Coupled Plasma -Mass Spectrometry). One of the most used method for model age estimations is the one of @Stacey:1975 which implies two stages: in the first one, the mantle evolves until 3.7 Ga, where crust formation leads to a second stage with different parameters. Another method was developed by @Cumming:1975 in which a parameter increases linearly over the history of the Earth. However, this last model is not well appropriate for the Northern part of Australia and @Sun:1996 modified it to better fit the Australian data. This new Python program aims to quickly calculate the model ages thanks to the @Sun:1996 and @Stacey:1975 models as it was designed for Proterozoic samples of the North Australian Craton. However, as the @Sun:1996 model is adapted from the @Cumming:1975 one only by changing one parameter value, this algorithm can be easily used for both models.
-
-This program can be used to calculate in a short time lots of model ages and $\mu$ values based on lead isotopes ratios. As an example, it allows the calculation of approximately 500 data in a few seconds, and with different models (two in the proposed program, and the parameters are easy to change for other similar models). The scope of this program in to calculate large sets of data when doing synthesis at regional scale for example.
+Lead isotopes are wildly used on sulphides (galena, pyrite, pyrrhotite, sphalerite, chalcopyrite, magnetite, hematite, arsenopyrite…) and whole rock to get information about the model age of the sulphides minerals. For some minerals, this method is the only way to estimate their age. One of the most used method for model age estimations is the one of @Stacey:1975 which implies two stages: in the first one, the mantle evolves until 3.7 Ga, where crust formation leads to a second stage with different parameters. Another method was developed by @Cumming:1975 in which a parameter increases linearly over the history of the Earth. However, this last model is not well appropriate for the Northern part of Australia and @Sun:1996 modified it to better fit the Australian data. This new Python program aims to quickly calculate the model ages and $\mu$ values thanks to the @Sun:1996 and @Stacey:1975 models as it was designed for Proterozoic samples of the North Australian Craton. However, as the @Sun:1996 model is adapted from the @Cumming:1975 one only by changing one parameter value, this algorithm can be easily used for both models. The scope of this program in to calculate large sets of data when doing synthesis at regional scale for example.
 
 # Program
 
@@ -70,13 +68,9 @@ In the interface, the user can specify several parameters that will be used in t
 
 The @Cumming:1975 model is based on the hypothesis of a steady growth in $\mu$ (representing the $^{238}$U/$^{204}$Pb ratio of a given reservoir) through time. Based on the $^{206}$Pb/$^{204}$Pb and $^{207}$Pb/$^{204}$Pb, ratios, it is possible to get the model age of crystallisation of the studied mineral by iteration. In this program, the model used is the one developed by @Sun:1996 for the North Australian Craton, which is the host of the mineralisation studied in this study. The equations in this model are the following ones: 
 
-$(^{206}Pb/^{204}Pb)_{t} = A_{0} + \mu _{206} * (e^{4.509 * \lambda _{238}} * (1 - \epsilon * (4.509 - 1/ \lambda _{238})) - e^{t * \lambda _{238}} * (1 - \epsilon * (t - 1 / \lambda _{238})))$
-
 $\mu _{206} = (((^{206}Pb/^{204}Pb)_{t}) - A_{0}) / (e^{4.509 * \lambda _{238}} * (1 - \epsilon * (4.509 - 1/ \lambda _{238})) - e^{t * \lambda _{238}}) * (1 - \epsilon * (t - 1/ \lambda _{238})))$
 
 and
-
-$(^{207}Pb/^{204}Pb)_{t} = B_{0} + \mu _{207} / 137.88 * (e^{4.509 * \lambda _{235}} * (1 - \epsilon * (4.509 - 1 / \lambda _{235})) - e^{t * \lambda _{235}} * (1 - \epsilon * (t - 1/ \lambda _{235})))$
 
 $\mu _{207} = 137.88 * ((^{207}Pb/^{204}Pb)_{t} - B_{0}) / (e^{4.509 * \lambda _{235}} * (1 - \epsilon * (4.509 - 1/ \lambda _{235})) - e^{t * \lambda _{235}} * (1 - \epsilon * (t - 1/ \lambda _{235})))$
 
@@ -86,13 +80,9 @@ These systems are solved when $\Delta$$\mu$ = $\mu$$_{206}$-$\mu$$_{207}$ are cl
 
 The @Stacey:1975 model implies two stages in Earth’s history: in the first one, the mantle evolves until 3.7 Ga, where crust formation leads to a second stage with different parameters. The equations in this model are the following ones: 
 
-$(^{206}Pb/^{204}Pb)_{t} = A_{0} + \mu _{p} * (e^{ \lambda _{238} * 4.57} - e^{ \lambda _{238} * 3.7}) + \mu _{206} * (e^{ \lambda _{238} * 3.7} - e^{ \lambda _{238} * t})$
-
 $\mu _{206} = ((^{206}Pb/^{204}Pb)_{t} - A_{0} - \mu _{p} * (e^{ \lambda _{238} * 4.57} - e^{ \lambda _{238} * 3.7})) / (e^{ \lambda _{238} * t} - e^{ \lambda _{238} * t})$
 
 and
-
-$(^{207}Pb/^{204}Pb)_{t} = B_{0} + \mu _ {p} / 137.88 * (e^{ \lambda _{235} * 4.57} - e^{ \lambda _{235} * 3.7}) + \mu _{207} / 137.88 * (e^{ \lambda _{235} * 3.7} - e^{ \lambda _{235} * t})$
 
 $\mu _{207} = ((^{207}Pb/^{204}Pb)_{t} - B_{0} - \mu _{p} / 137.88 * (e^{ \lambda _{235} * 4.57} - e^{ \lambda _{235} * 3.7})) * 137.88 / ((e^{ \lambda _{235} * 3.7} - e^{ \lambda _{235} * t})$
 
