@@ -36,21 +36,31 @@ This program can be used to calculate in a short time lots of model ages and $\m
 
 The program takes as input an Excel sheet in .csv with three columns: Sample name, $^{206}$Pb/$^{204}$Pb and $^{207}$Pb/$^{204}$Pb ratios. The output is an Excel sheet in .csv with nine columns: Sample name, calculated age with the @Sun:1996 model in Ga, $\mu$$_{206}$=$^{238}$U/$^{204}$Pb ratio for the $^{206}$Pb decay chain in the @Sun:1996 model, $\mu$$_{207}$=$^{238}$U/$^{204}$Pb ratio for the $^{207}$Pb decay chain in the @Sun:1996 model, $\Delta$$\mu$ =$\mu$$_{206}$-$\mu$$_{207}$ in the @Sun:1996 model, and the same parameters for the @Stacey:1975 model.
 
-Constants and unknowns
+## Constants and unknowns
 
 The program works with the following constants: 
-A$_{0}$ = ($^{206}$Pb/$^{204}$Pb)$_{t0}$= 9.307 [@Tatsumoto:1973];
-B$_{0}$ = ($^{207}$Pb/$^{204}$Pb)$_{t0}$= 10.294 [@Tatsumoto:1973].
+
+A$_{0}$ = ($^{206}$Pb/$^{204}$Pb)$_{t0}$= 9.307 [@Tatsumoto:1973]
+
+B$_{0}$ = ($^{207}$Pb/$^{204}$Pb)$_{t0}$= 10.294 [@Tatsumoto:1973]
+
 $\epsilon$ = 0.0833 (rate factor, [@Sun:1996])
+
 $\lambda$$_{238}$ = 0.155125 * 10$^{-9}$ yr$^{-1}$ is the decay constant of $^{238}$U
+
 $\lambda$$_{235}$ = 0.98485 * 10$^{-9}$ yr$^{-1}$ is the decay constant of $^{235}$U 
+
 $\mu$$_{p}$ = 7.192 is the $^{238}$U/$^{204}$Pb ratio of the Mantle [@Tatsumoto:1973]
+
 ($^{206}$Pb/$^{204}$Pb)$_{t}$ is the measured $^{206}$Pb/$^{204}$Pb ratio
+
 ($^{207}$Pb/$^{204}$Pb)$_{t}$ is the measured $^{207}$Pb/$^{204}$Pb ratio
+
 The 1/137.88 ratio corresponds to the $^{235}$U/$^{238}$U ratio, known to be constant for all U of normal isotopic composition in the Earth at the present time [@Halla:2018]. 
+
 The unknowns determined by the program are: t (model age of the analysed galena or sulphide) and the $\mu$ value at that time that is found when $\mu$$_{206}$ = $\mu$$_{207}$, both parameters for the two proposed models. 
 
-Interface
+## Interface
 
 In the interface, the user can specify several parameters that will be used in the calculation. These parameters are the emplacement of the Excelsheet containing the data, which model he wants to use if he wants the graphical representation or not. In addition, the $\mu$ curves for different chosen values could be added to the graphical representation.
  
@@ -59,7 +69,7 @@ Figure 1: Interface of the FindAge program, with the different fields that have 
 
 # Lead isotopes evolution models
 
-Cumming and Richard (1975) and Sun et al. (1996) models 
+## Cumming and Richard (1975) and Sun et al. (1996) models 
 
 The @Cumming:1975 model is based on the hypothesis of a steady growth in $\mu$ (representing the $^{238}$U/$^{204}$Pb ratio of a given reservoir) through time. Based on the $^{206}$Pb/$^{204}$Pb and $^{207}$Pb/$^{204}$Pb, ratios, it is possible to get the model age of crystallisation of the studied mineral by iteration. In this program, the model used is the one developed by @Sun:1996 for the North Australian Craton, which is the host of the mineralisation studied in this study. The equations in this model are the following ones: 
 
@@ -75,7 +85,7 @@ $\mu _{207} = 137.88 * ((^{207}Pb/^{204}Pb)_{t} - B_{0}) / (e^{4.509 * \lambda _
 
 These systems are solved when $\Delta$$\mu$ = $\mu$$_{206}$-$\mu$$_{207}$ are close to zero, and yields t and $\mu$$_{206}$~$\mu$$_{207}$. @Cumming:1975 have chosen the rate factor $\epsilon$ = 0.050 * 10$^{-9}$ yr$^{-1}$. In the @Sun:1996 model, the $\epsilon$ value has been modified, with $\epsilon$ = 0.0833 * 10$^{-9}$ yr$^{-1}$ to better fit with the Australian data. This parameter can be modified in the program to calculate with one of the two models.
 
-Stacey and Kramers (1975) model
+## Stacey and Kramers (1975) model
 
 The @Stacey:1975 model implies two stages in Earth’s history: in the first one, the mantle evolves until 3.7 Ga, where crust formation leads to a second stage with different parameters. The equations in this model are the following ones: 
 
