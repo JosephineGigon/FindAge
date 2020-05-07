@@ -35,7 +35,7 @@ This program can be used to calculate in a short time lots of model ages and &mu
 
 # Program
 
-The program takes as input an Excel sheet in .csv with four columns: Sample name, <sup>206</sup>Pb/<sup>204</sup>Pb, <sup>207</sup>Pb/<sup>204</sup>Pb and <sup>208</sup>Pb/<sup>204</sup>Pb ratios. The output is an Excel sheet in .csv with nine columns: Sample name, calculated age with the `Sun:1996` model in Ga, &mu206 (= 238U/204Pb ratio for the 206Pb decay chain in the `Sun:1996` model, &mu207 (= <sup>238</sup>U/<sup>204</sup>Pb ratio for the 207Pb decay chain in the `Sun:1996` model, &Delta&mu = &mu206 - &mu207 in the `Sun:1996` model, and the same parameters for the `Stacey:1975` model.
+The program takes as input an Excel sheet in .csv with three columns: Sample name, <sup>206</sup>Pb/<sup>204</sup>Pb and <sup>207</sup>Pb/<sup>204</sup>Pb ratios. The output is an Excel sheet in .csv with nine columns: Sample name, calculated age with the `Sun:1996` model in Ga, &mu<sub>206</sub> (= <sup>238</sup>U/<sup>204</sup>Pb ratio for the <sup>206</sup>Pb decay chain in the `Sun:1996` model, &mu<sub>207</sub> (= <sup>238</sup>U/<sup>204</sup>Pb ratio for the <sup>207</sup>Pb decay chain in the `Sun:1996` model, &Delta&mu = &mu<sub>206</sub> - &mu<sub>207</sub> in the `Sun:1996` model, and the same parameters for the `Stacey:1975` model.
 
 Constants and unknowns
 
