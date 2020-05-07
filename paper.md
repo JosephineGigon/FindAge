@@ -43,7 +43,7 @@ A<sub>0</sub> = (<sup>206</sup>Pb/<sup>204</sup>Pb)<sub>t0</sub>= 9.307 [@Tatsum
 B<sub>0</sub> = (<sup>207</sup>Pb/<sup>204</sup>Pb)<sub>t0</sub>= 10.294 [@Tatsumoto:1973]
 $\epsilon$ = 0.0833 (rate factor, [@Sun:1996])
 $\lambda$<sub>238</sub> = 0.155125 * 10<sup>-9</sup> yr<sup>-1</sup> is the decay constant of <sup>238</sup>U
-$\$lambda<sub>235</sub> = 0.98485 * 10<sup>-9</sup> yr<sup>-1</sup> is the decay constant of <sup>235</sup>U 
+$\lambda$<sub>235</sub> = 0.98485 * 10<sup>-9</sup> yr<sup>-1</sup> is the decay constant of <sup>235</sup>U 
 $\mu$<sub>p</sub> = 7.192 is the <sup>238</sup>U/<sup>204</sup>Pb ratio of the Mantle [@Tatsumoto:1973]
 (<sup>206</sup>Pb/<sup>204</sup>Pb)<sub>t</sub> is the measured <sup>206</sup>Pb/<sup>204</sup>Pb ratio
 (<sup>207</sup>Pb/<sup>204</sup>Pb)<sub>t</sub> is the measured <sup>207</sup>Pb/<sup>204</sup>Pb ratio
