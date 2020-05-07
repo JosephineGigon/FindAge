@@ -65,13 +65,13 @@ The @Cumming:1975 model is based on the hypothesis of a steady growth in $\mu$ (
 
 $(^{206}Pb/^{204}Pb)_{t} = A_{0} + \mu _{206} * (e^{4.509 * \lambda _{238}} * (1 - \epsilon * (4.509 - 1/ \lambda _{238})) - e^{t * \lambda _{238}} * (1 - \epsilon * (t - 1 / \lambda _{238})))$
 
-$ \mu _{206}> = (((^{206}Pb/^{204}Pb)_{t}) - A_{0}) / (e^{4.509 * \lambda _{238}} * (1 - \epsilon * (4.509 - 1/ \lambda _{238})) - e^{t * \lambda _{238}) * (1 - \epsilon * (t - 1/ \lambda _{238})))$
+$\mu _{206}> = (((^{206}Pb/^{204}Pb)_{t}) - A_{0}) / (e^{4.509 * \lambda _{238}} * (1 - \epsilon * (4.509 - 1/ \lambda _{238})) - e^{t * \lambda _{238}) * (1 - \epsilon * (t - 1/ \lambda _{238})))$
 
 and
 
 $(^{207}Pb/^{204}Pb)_{t} = B_{0} + \mu _{207} / 137.88 * (e^{4.509 * \lambda _{235}} * (1 - \epsilon * (4.509 - 1 / \lambda _{235})) - e^{t * \lambda _{235}} * (1 - \epsilon * (t - 1/ \lambda _{235})))$
 
-$ \mu _{207} = 137.88 * ((^{207}Pb/^{204<}Pb)_{t} - B_{0}) / (e^{4.509 * \lambda _{235}} * (1 - \epsilon * (4.509 - 1/ \lambda _{235})) - e^{t * \lambda _{235}} * (1 - \epsilon * (t - 1/ \lambda _{235})))$
+$\mu _{207} = 137.88 * ((^{207}Pb/^{204<}Pb)_{t} - B_{0}) / (e^{4.509 * \lambda _{235}} * (1 - \epsilon * (4.509 - 1/ \lambda _{235})) - e^{t * \lambda _{235}} * (1 - \epsilon * (t - 1/ \lambda _{235})))$
 
 These systems are solved when $\Delta$$\mu$ = $\mu$<sub>206</sub>-$\mu$<sub>207</sub> are close to zero, and yields t and $\mu$<sub>206</sub>~$\mu$<sub>207</sub>. @Cumming:1975 have chosen the rate factor $\epsilon$ = 0.050 * 10<sup>-9</sup> yr<sup>-1</sup>. In the @Sun:1996 model, the $\epsilon$ value has been modified, with $\epsilon$ = 0.0833 * 10<sup>-9</sup> yr<sup>-1</sup> to better fit with the Australian data. This parameter can be modified in the program to calculate with one of the two models.
 
@@ -81,13 +81,13 @@ The @Stacey:1975 model implies two stages in Earth’s history: in the first one
 
 $(^{206}Pb/^{204}Pb)_{t} = A_{0} + \mu _{p} * (e^{ \lambda _{238} * 4.57} - e^{ \lambda _{238} * 3.7}) + \mu _{206} * (e^{ \lambda _{238} * 3.7} - e^{ \lambda _{238} * t})$
 
-$ \mu _{206} = ((^{206}Pb/^{204}Pb)_{t} - A_{0} - \mu _{p} * (e^{ \lambda _{238} * 4.57} - e^{ \lambda _{238} * 3.7})) / (e^{ \lambda _{238} * t} - e^{ \lambda _{238} * t})$
+$\mu _{206} = ((^{206}Pb/^{204}Pb)_{t} - A_{0} - \mu _{p} * (e^{ \lambda _{238} * 4.57} - e^{ \lambda _{238} * 3.7})) / (e^{ \lambda _{238} * t} - e^{ \lambda _{238} * t})$
 
 and
 
 $(^{207}Pb/^{204}Pb)_{t} = B_{0} + \mu _ {p} / 137.88 * (e^{ \lambda _{235} * 4.57} - e^{ \lambda _{235} * 3.7}) + \mu _{207} / 137.88 * (e^{ \lambda _{235} * 3.7} - e^{ \lambda _{235} * t})$
 
-$ \mu _{207} = ((^{207}Pb/^{204}Pb)_{t} - B_{0} - \mu _{p} / 137.88 * (e^{ \lambda _{235} * 4.57} - e^{ \lambda _{235} * 3.7})) * 137.88 / ((e^{ \lambda _{235} * 3.7} - e^{ \lambda _{235} * t})$
+$\mu _{207} = ((^{207}Pb/^{204}Pb)_{t} - B_{0} - \mu _{p} / 137.88 * (e^{ \lambda _{235} * 4.57} - e^{ \lambda _{235} * 3.7})) * 137.88 / ((e^{ \lambda _{235} * 3.7} - e^{ \lambda _{235} * t})$
 
 These systems are solved when $\Delta$$\mu$ = $\mu$<sub>206</sub> - $\mu$<sub>207</sub> are close to zero, and yields t and $\mu$<sub>206</sub>~$\mu$<sub>207</sub>. 
 
