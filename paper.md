@@ -94,9 +94,9 @@ These systems are solved when $\Delta$$\mu$ = $\mu$$_{206}$ - $\mu$$_{207}$ are 
 
 # Graphical representation
 
-FindAge also provides a graphical representation of the analyses (black dots) as well as the isochrones for two different models [Stacey:1975; Sun:1996]. The isochrons defined in the program are from 0 to 3000 Ma to cover the vast majority of rocks on Earth. Figure  \ref{fig:Figure2} presents the results for all the lead isotopes data acquired for the XXX deposit.
+FindAge also provides a graphical representation of the analyses (black dots) as well as the isochrones for two different models [Stacey:1975; Sun:1996]. The isochrons defined in the program are from 0 to 3000 Ma to cover the vast majority of rocks on Earth. Figure  \ref{fig:Figure1} presents the results for all the lead isotopes data acquired for the XXX deposit.
 
-![Example of diagram provided by the FindAge program, with several isochrons (SK = Stacey and Kramers, 1975 and Sun = Sun et al., 1996).\label{fig:Figure2}](Figure2.png)
+![Example of diagram provided by the FindAge program, with several isochrons (SK = Stacey and Kramers, 1975 and Sun = Sun et al., 1996).\label{fig:Figure1}](Figure1.png)
 
 # Acknowledgements
 
