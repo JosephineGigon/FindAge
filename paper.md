@@ -17,7 +17,7 @@ authors:
   - name: Irvine Annesley
     affiliation: 1
 affiliations:
- - name: Laboratoire GeoRessources
+ - name: Université de Lorraine, CNRS, CREGU, GeoRessources, F-54500 Vandœuvre-lès-Nancy, France
    index: 1
  - name: Total
    index: 2
