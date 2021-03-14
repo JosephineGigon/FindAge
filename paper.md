@@ -12,12 +12,16 @@ authors:
     affiliation: 1
   - name: Margaux Raguenel
     affiliation: 2
+  - name: Antonin Richard
+    affiliation: 1
+  - name: Irvine Annesley
+    affiliation: 1
 affiliations:
  - name: Laboratoire GeoRessources
    index: 1
  - name: Total
    index: 2
-date: XX May 2020
+date: 14 March 2021
 bibliography: paper.bib
 
 ---
