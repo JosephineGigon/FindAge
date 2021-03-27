@@ -1,1 +1,519 @@
-coller le code ici
+"""
+Code to determine sample age from Pb proportions
+
+Author: Margaux Raguenel
+Date: 30/04/2018
+"""
+
+from math import exp
+
+import matplotlib.pyplot as plt
+from matplotlib.font_manager import FontProperties
+
+def main():
+    print("Welcome to the age determination tool !")
+    # initialisation of all constants
+    A0 = 9.307
+    B0 = 10.294
+    Epsilon = 0.0833
+    Lambda238 = 0.155125
+    Lambda235 = 0.98485
+    Mup = 7.192
+
+    # initial computation of minimum value
+    xmin = 30
+    xmax = 0
+    ymin = 30
+    ymax = 0
+
+    # initialisation of the parameters to change
+    AgeInit = 3  # initial age in Ga
+    Increment = 0.0001
+
+    # input of the files
+    # NomFichier : name of the file with the data, must be in .csv, with . for decimal delimiter
+    NomFichier = "C:\\Users\\gigon1\\Desktop\\datation.csv"
+    Fichier = open(NomFichier, 'r')
+    # NomFichierResultats : name of the output file, will be a .csv with . for decimal delimiter
+    NomFichierResultats = "C:\\Users\\gigon1\\Desktop\\DatationResults.csv"
+    FichierResultats = open(NomFichierResultats, 'w')
+    x=[]
+    y=[]
+
+    for ligne in Fichier:
+        # get the data from the file
+        SampleName, Prop206_204Pb, Prop207_204Pb = ligne.split(";")[0:3]
+        # transformation of the string from the file to a number
+        Prop206_204Pb = float(Prop206_204Pb)
+        Prop207_204Pb = float(Prop207_204Pb)
+        x.append(Prop206_204Pb)
+        y.append(Prop207_204Pb)
+
+        # print("206/204Pb ", Prop206_204Pb)
+        # print("207/204Pb ", Prop207_204Pb)
+
+        # change of the minimum value
+        if ymin > Prop207_204Pb:
+            ymin = Prop207_204Pb
+        if ymax < Prop207_204Pb:
+            ymax = Prop207_204Pb
+        if xmin > Prop206_204Pb:
+            xmin = Prop206_204Pb
+        if xmax < Prop206_204Pb:
+            xmax = Prop206_204Pb
+        # initial computation of Mu206Sun, Mu207Sun, DeltaMuSun, Mu206SK, Mu207SK, DeltaMuSK
+
+        Mu206SunInit = (Prop206_204Pb - A0) / (exp(4.509 * Lambda238) * (1 - (Epsilon * (4.509 - 1 / Lambda238))) - (
+                    exp(AgeInit * Lambda238) * (1 - Epsilon * (AgeInit - 1 / Lambda238))))
+        # print("Mu206 Sun et al. init: ", Mu206Init)
+        Mu207SunInit = 137.88 * (Prop207_204Pb - B0) / (
+                    exp(4.509 * Lambda235) * (1 - Epsilon * (4.509 - 1 / Lambda235)) - exp(AgeInit * Lambda235) * (
+                        1 - Epsilon * (AgeInit - 1 / Lambda235)))
+        # print("Mu207 Sun et al. init: ", Mu207Init)
+        DeltaMuSunInit = Mu206SunInit - Mu207SunInit
+        # print("Delta Mu Sun et al. initial: ", DeltaMuInit)
+
+        Mu206SKInit = (Prop206_204Pb - A0 - Mup * ((exp(4.57 * Lambda238) - exp(3.7 * Lambda238)))) / (
+                exp(3.7 * Lambda238) - exp(AgeInit * Lambda238))
+        # print("Mu206 Stacey & Kramers init: ", Mu206SKInit)
+        Mu207SKInit = (Prop207_204Pb - B0 - Mup / 137.88 * (
+                exp(4.57 * Lambda235) - exp(3.7 * Lambda235))) * 137.88 / (
+                          exp(3.7 * Lambda235) - exp(AgeInit * Lambda235))
+        # print("Mu207 Stacey & Kramers init: ", Mu207SKInit)
+        DeltaMuSKInit = Mu206SKInit - Mu207SKInit
+        # print("Delta Mu Stacey & Kramers initial: ", DeltaMuSKInit)
+
+        # Sun et al. Model
+
+        if DeltaMuSunInit != 0:
+            # print("Sun et al Model")
+
+            AgeSun = AgeInit - Increment
+            # print(Age)
+            Mu206Sun = (Prop206_204Pb - A0) / (
+                        exp(4.509 * Lambda238) * (1 - Epsilon * (4.509 - 1 / Lambda238)) - exp(AgeSun * Lambda238) * (
+                            1 - Epsilon * (AgeSun - 1 / Lambda238)))
+            Mu207Sun = 137.88 * (Prop207_204Pb - B0) / (
+                        exp(4.509 * Lambda235) * (1 - Epsilon * (4.509 - 1 / Lambda235)) - exp(AgeSun * Lambda235) * (
+                            1 - Epsilon * (AgeSun - 1 / Lambda235)))
+            DeltaMuSun = Mu206Sun - Mu207Sun
+            # print("Delta Mu Sun et al.: ",DeltaMuSun)
+            # print("abs delta mu Sun: ", abs(DeltaMuSun), " < abs delta mu Sun initial ", abs(DeltaMuSunInit))
+
+            # iteration loop to find the age through the computation of Mu206Sun, Mu207Sun and DeltaMuSun
+            while abs(DeltaMuSun) < abs(DeltaMuSunInit):
+
+                DeltaMuSunInit = DeltaMuSun
+                Mu206SunInit = Mu206Sun
+                Mu207SunInit = Mu207Sun
+                # print("Delta Mu Sun: ", DeltaMuSun)
+                # print("Delta Mu Sun Initial: ", DeltaMuSunInit)
+                AgeSun = AgeSun - Increment
+                # print(AgeSun)
+                Mu206Sun = (Prop206_204Pb - A0) / (
+                            exp(4.509 * Lambda238) * (1 - Epsilon * (4.509 - 1 / Lambda238)) - exp(
+                        AgeSun * Lambda238) * (1 - Epsilon * (AgeSun - 1 / Lambda238)))
+                Mu207Sun = 137.88 * (Prop207_204Pb - B0) / (
+                            exp(4.509 * Lambda235) * (1 - Epsilon * (4.509 - 1 / Lambda235)) - exp(
+                        AgeSun * Lambda235) * (1 - Epsilon * (AgeSun - 1 / Lambda235)))
+                DeltaMuSun = Mu206Sun - Mu207Sun
+
+
+
+                # print("Delta Mu Sun: ", DeltaMuSun)
+                # print("Delta Mu Sun Initial: ", DeltaMuSunInit)
+                # print("abs delta mu Sun: ", abs(DeltaMuSun), " < abs delta mu Sun initial ", abs(DeltaMuSunInit))
+
+            # print("end of while loop")
+            # print(AgeSun+Increment)
+
+        else:
+            print(AgeInit)
+
+        # Stacey and Kramers Model
+        if DeltaMuSKInit != 0:
+            # print("Stacey and Kramers Model")
+            # initialisation of the parameters to change
+
+            AgeSK = AgeInit - Increment
+            # print(AgeSK)
+
+            Mu206SK = (Prop206_204Pb - A0 - Mup * ((exp(4.57 * Lambda238) - exp(3.7 * Lambda238)))) / (
+                    exp(3.7 * Lambda238) - exp(AgeSK * Lambda238))
+            Mu207SK = (Prop207_204Pb - B0 - Mup / 137.88 * (
+                    exp(4.57 * Lambda235) - exp(3.7 * Lambda235))) * 137.88 / (
+                              exp(3.7 * Lambda235) - exp(AgeSK * Lambda235))
+            DeltaMuSK = Mu206SK - Mu207SK
+            # print("Delta Mu SK et al.: ",DeltaMuSK)
+            # print("abs delta mu SK: ", abs(DeltaMuSK), " < abs delta mu SK initial ", abs(DeltaMuSKInit))
+
+            # iteration loop to find the age through the computation of Mu206SK, Mu207SK and DeltaMuSK
+            while abs(DeltaMuSK) < abs(DeltaMuSKInit):
+                DeltaMuSKInit = DeltaMuSK
+                Mu206SKInit = Mu206SK
+                Mu207SKInit = Mu207SK
+                # print("Delta Mu SK: ", DeltaMuSK)
+                # print("Delta Mu SK Initial: ", DeltaMuSKInit)
+                AgeSK = AgeSK - Increment
+                # print(AgeSK)
+                Mu206SK = (Prop206_204Pb - A0 - Mup * ((exp(4.57 * Lambda238) - exp(3.7 * Lambda238)))) / (
+                            exp(3.7 * Lambda238) - exp(AgeSK * Lambda238))
+                Mu207SK = (Prop207_204Pb - B0 - Mup / 137.88 * (
+                            exp(4.57 * Lambda235) - exp(3.7 * Lambda235))) * 137.88 / (
+                                      exp(3.7 * Lambda235) - exp(AgeSK * Lambda235))
+                DeltaMuSK = Mu206SK - Mu207SK
+                # print("Delta Mu SK: ", DeltaMuSK)
+                # print("Delta Mu SK Initial: ", DeltaMuSKInit)
+                # print("abs delta mu SK: ", abs(DeltaMuSK), " < abs delta mu SK initial ", abs(DeltaMuSKInit))
+
+            # print("end of while loop")
+            # print(AgeSK+Increment)
+
+        else:
+            print(AgeInit)
+
+
+        FichierResultats.write(SampleName + ";" + str(AgeSun + Increment) + ";" + str(Mu206SunInit) + ";" + str(
+                Mu207SunInit) + ";" + str(DeltaMuSunInit) + ";" + str(AgeSK + Increment) + ";" + str(
+                Mu206SKInit) + ";" + str(Mu207SKInit) + ";" + str(DeltaMuSKInit) + "\n")
+
+    print("All ages have been determined, check your result file !")
+
+    Fichier.close()
+    FichierResultats.close()
+
+    # equation for 100 Ma (Stacey & Kramers model) y = 0.3546x + 9.0434
+    # equation for 200 Ma (Stacey & Kramers model) y = 0.361x + 8.9724
+    # equation for 300 Ma (Stacey & Kramers model) y = 0.3678x + 8.8962
+    # equation for 400 Ma (Stacey & Kramers model) y = 0.3748x + 8.8184
+    # equation for 500 Ma (Stacey & Kramers model) y = 0.3822x + 8.7357
+    # equation for 600 Ma (Stacey & Kramers model) y = 0.3899x + 8.6499
+    # equation for 700 Ma (Stacey & Kramers model) y = 0.398x + 8.5595
+    # equation for 800 Ma (Stacey & Kramers model) y = 0.4065x + 8.4644
+    # equation for 900 Ma (Stacey & Kramers model) y = 0.4153x + 8.3667
+    # equation for 1000 Ma (Stacey & Kramers model) y = 0.4246x + 8.2629
+    # equation for 1100 Ma (Stacey & Kramers model) y = 0.4344x + 8.1533
+    # equation for 1200 Ma (Stacey & Kramers model) y = 0.4446x + 8.0397
+    # equation for 1300 Ma (Stacey & Kramers model) y = 0.4553x + 7.9206
+    # equation for 1400 Ma (Stacey & Kramers model) y = 0.4666x + 7.7944
+    # equation for 1500 Ma (Stacey & Kramers model) y = 0.4784x + 7.6631
+    # equation for 1600 Ma (Stacey & Kramers model) y = 0.4909x + 7.5235
+    # equation for 1700 Ma (Stacey & Kramers model) y = 0.504x + 7.3775
+    # equation for 1800 Ma (Stacey & Kramers model) y = 0.5178x + 7.2235
+    # equation for 1900 Ma (Stacey & Kramers model) y = 0.5323x + 7.062
+    # equation for 2000 Ma (Stacey & Kramers model) y = 0.5476x + 6.8913
+    # equation for 2100 Ma (Stacey & Kramers model) y = 0.5638x + 6.7104
+    # equation for 2200 Ma (Stacey & Kramers model) y = 0.5808x + 6.5209
+    # equation for 2300 Ma (Stacey & Kramers model) y = 0.5987x + 6.3214
+    # equation for 2400 Ma (Stacey & Kramers model) y = 0.6177x + 6.1094
+    # equation for 2500 Ma (Stacey & Kramers model) y = 0.6377x + 5.8864
+    # equation for 2600 Ma (Stacey & Kramers model) y = 0.6588x + 5.6512
+    # equation for 2700 Ma (Stacey & Kramers model) y = 0.6812x + 5.4012
+    # equation for 2800 Ma (Stacey & Kramers model) y = 0.7048x + 5.1381
+    # equation for 2900 Ma (Stacey & Kramers model) y = 0.7298x + 4.8593
+    # equation for 3000 Ma (Stacey & Kramers model) y = 0.7563x + 4.5637
+
+    A100SK, B100SK = 0.3546, 9.0434
+    A200SK, B200SK = 0.3610, 8.9724
+    A300SK, B300SK = 0.3678, 8.8962
+    A400SK, B400SK = 0.3748, 8.8184
+    A500SK, B500SK = 0.3822, 8.7357
+    A600SK, B600SK = 0.3899, 8.6499
+    A700SK, B700SK = 0.3980, 8.5595
+    A800SK, B800SK = 0.4065, 8.4644
+    A900SK, B900SK = 0.4153, 8.3667
+    A1000SK, B1000SK = 0.4246, 8.2629
+    A1100SK, B1100SK = 0.4344, 8.1533
+    A1200SK, B1200SK = 0.4446, 8.0397
+    A1300SK, B1300SK = 0.4553, 7.9206
+    A1400SK, B1400SK = 0.4666, 7.7944
+    A1500SK, B1500SK = 0.4784, 7.6631
+    A1600SK, B1600SK = 0.4909, 7.5235
+    A1700SK, B1700SK = 0.504, 7.3775
+    A1800SK, B1800SK = 0.5178, 7.2235
+    A1900SK, B1900SK = 0.5323, 7.062
+    A2000SK, B2000SK = 0.5476, 6.8913
+    A2100SK, B2100SK = 0.5638, 6.7104
+    A2200SK, B2200SK = 0.5808, 6.5209
+    A2300SK, B2300SK = 0.5987, 6.3214
+    A2400SK, B2400SK = 0.6177, 6.1094
+    A2500SK, B2500SK = 0.6377, 5.8864
+    A2600SK, B2600SK = 0.6588, 5.6512
+    A2700SK, B2700SK = 0.6812, 5.4012
+    A2800SK, B2800SK = 0.7048, 5.1381
+    A2900SK, B2900SK = 0.7298, 4.8593
+    A3000SK, B3000SK = 0.7298, 4.8593
+
+    y100SK = []
+    y200SK = []
+    y300SK = []
+    y400SK = []
+    y500SK = []
+    y600SK = []
+    y700SK = []
+    y800SK = []
+    y900SK = []
+    y1000SK = []
+    y1100SK = []
+    y1200SK = []
+    y1200SK = []
+    y1300SK = []
+    y1400SK = []
+    y1500SK = []
+    y1600SK = []
+    y1700SK = []
+    y1800SK = []
+    y1900SK = []
+    y2000SK = []
+    y2100SK = []
+    y2200SK = []
+    y2300SK = []
+    y2400SK = []
+    y2500SK = []
+    y2600SK = []
+    y2700SK = []
+    y2800SK = []
+    y2900SK = []
+    y3000SK = []
+
+    #equation for 100 Ma (Sun et al. model) y = 0.5448x + 5.2233
+    #equation for 200 Ma (Sun et al. model) y = 0.5548x + 5.1305
+    #equation for 300 Ma (Sun et al. model) y = 0.5652x + 5.034
+    #equation for 400 Ma (Sun et al. model) y = 0.5761x + 4.9323
+    #equation for 500 Ma (Sun et al. model) y = 0.5874x + 4.8271
+    #equation for 600 Ma (Sun et al. model) y = 0.5992x + 4.717
+    #equation for 700 Ma (Sun et al. model) y = 0.6114x + 4.6038
+    #equation for 800 Ma (Sun et al. model) y = 0.6242x + 4.4844
+    #equation for 900 Ma (Sun et al. model) y = 0.6375x + 4.3606
+    #equation for 1000 Ma (Sun et al. model) y = 0.6513x + 4.2327
+    #equation for 1100 Ma (Sun et al. model) y = 0.6658x + 4.0975
+    #equation for 1200 Ma (Sun et al. model) y = 0.6809x + 3.957
+    #equation for 1300 Ma (Sun et al. model) y = 0.6967x + 3.8097
+    #equation for 1400 Ma (Sun et al. model) y = 0.7132x + 3.6559
+    #equation for 1500 Ma (Sun et al. model) y = 0.7304x + 3.4959
+    #equation for 1600 Ma (Sun et al. model) y = 0.7484x + 3.3283
+    #equation for 1700 Ma (Sun et al. model) y = 0.7672x + 3.1535
+    #equation for 1800 Ma (Sun et al. model) y = 0.7869x + 2.97
+    #equation for 1900 Ma (Sun et al. model) y = 0.8075x + 2.7784
+    #equation for 2000 Ma (Sun et al. model) y = 0.8291x + 2.5772
+    #equation for 2100 Ma (Sun et al. model) y = 0.8517x + 2.3669
+    #equation for 2200 Ma (Sun et al. model) y = 0.8754x + 2.1463
+    #equation for 2300 Ma (Sun et al. model) y = 0.9002x + 1.9159
+    #equation for 2400 Ma (Sun et al. model) y = 0.9263x + 1.6727
+    #equation for 2500 Ma (Sun et al. model) y = 0.9536x + 1.4191
+    #equation for 2600 Ma (Sun et al. model) y = 0.9823x + 1.1521
+    #equation for 2700 Ma (Sun et al. model) y = 1.0125x + 0.8707
+    #equation for 2800 Ma (Sun et al. model) y = 1.0442x + 0.5756
+    #equation for 2900 Ma (Sun et al. model) y = 1.0775x + 0.2658
+    #equation for 3000 Ma (Sun et al. model) y = 1.1125x + -0.0597
+
+    A100Sun, B100Sun = 0.5448, 5.2233
+    A200Sun, B200Sun = 0.5548, 5.1305
+    A300Sun, B300Sun = 0.5652, 5.0340
+    A400Sun, B400Sun = 0.5761, 4.9323
+    A500Sun, B500Sun = 0.5874, 4.8271
+    A600Sun, B600Sun = 0.5992, 4.7170
+    A700Sun, B700Sun = 0.6114, 4.6038
+    A800Sun, B800Sun = 0.6242, 4.4844
+    A900Sun, B900Sun = 0.6375, 4.3606
+    A1000Sun, B1000Sun = 0.6513, 4.2327
+    A1100Sun, B1100Sun = 0.6658, 4.0975
+    A1200Sun, B1200Sun = 0.6809, 3.9570
+    A1300Sun, B1300Sun = 0.6967, 3.8097
+    A1400Sun, B1400Sun = 0.7132, 3.6559
+    A1500Sun, B1500Sun = 0.7304, 3.4959
+    A1600Sun, B1600Sun = 0.7484, 3.3283
+    A1700Sun, B1700Sun = 0.7672, 3.1535
+    A1800Sun, B1800Sun = 0.7869, 2.9700
+    A1900Sun, B1900Sun = 0.8075, 2.7784
+    A2000Sun, B2000Sun = 0.8291, 2.5772
+    A2100Sun, B2100Sun = 0.8517, 2.3669
+    A2200Sun, B2200Sun = 0.8754, 2.1463
+    A2300Sun, B2300Sun = 0.9002, 1.9159
+    A2400Sun, B2400Sun = 0.9263, 1.6727
+    A2500Sun, B2500Sun = 0.9536, 1.4191
+    A2600Sun, B2600Sun = 0.9823, 1.1521
+    A2700Sun, B2700Sun = 1.0125, 0.8707
+    A2800Sun, B2800Sun = 1.0442, 0.5756
+    A2900Sun, B2900Sun = 1.0775, 0.2658
+    A3000Sun, B3000Sun = 1.1125, -0.0597
+
+    y100Sun = []
+    y200Sun = []
+    y300Sun = []
+    y400Sun = []
+    y500Sun = []
+    y600Sun = []
+    y700Sun = []
+    y800Sun = []
+    y900Sun = []
+    y1000Sun = []
+    y1100Sun = []
+    y1200Sun = []
+    y1300Sun = []
+    y1400Sun = []
+    y1500Sun = []
+    y1600Sun = []
+    y1700Sun = []
+    y1800Sun = []
+    y1900Sun = []
+    y2000Sun = []
+    y2100Sun = []
+    y2200Sun = []
+    y2300Sun = []
+    y2400Sun = []
+    y2500Sun = []
+    y2600Sun = []
+    y2700Sun = []
+    y2800Sun = []
+    y2900Sun = []
+    y3000Sun = []
+
+    for Xi in x:
+        y100SK.append(A100SK * Xi + B100SK)
+        y200SK.append(A200SK * Xi + B200SK)
+        y300SK.append(A300SK * Xi + B300SK)
+        y400SK.append(A400SK * Xi + B400SK)
+        y500SK.append(A500SK * Xi + B500SK)
+        y600SK.append(A600SK * Xi + B600SK)
+        y700SK.append(A700SK * Xi + B700SK)
+        y800SK.append(A800SK * Xi + B800SK)
+        y900SK.append(A900SK * Xi + B900SK)
+        y1000SK.append(A1000SK * Xi + B1000SK)
+        y1100SK.append(A1100SK * Xi + B1100SK)
+        y1200SK.append(A1200SK * Xi + B1200SK)
+        y1300SK.append(A1300SK * Xi + B1300SK)
+        y1400SK.append(A1400SK * Xi + B1400SK)
+        y1500SK.append(A1500SK * Xi + B1500SK)
+        y1600SK.append(A1600SK * Xi + B1600SK)
+        y1700SK.append(A1700SK * Xi + B1700SK)
+        y1800SK.append(A1800SK * Xi + B1800SK)
+        y1900SK.append(A1900SK * Xi + B1900SK)
+        y2000SK.append(A2000SK * Xi + B2000SK)
+        y2100SK.append(A2100SK * Xi + B2100SK)
+        y2200SK.append(A2200SK * Xi + B2200SK)
+        y2300SK.append(A2300SK * Xi + B2300SK)
+        y2400SK.append(A2400SK * Xi + B2400SK)
+        y2500SK.append(A2500SK * Xi + B2500SK)
+        y2600SK.append(A2600SK * Xi + B2600SK)
+        y2700SK.append(A2700SK * Xi + B2700SK)
+        y2800SK.append(A2800SK * Xi + B2800SK)
+        y2900SK.append(A2900SK * Xi + B2900SK)
+        y3000SK.append(A3000SK * Xi + B3000SK)
+
+        y100Sun.append(A100Sun * Xi + B100Sun)
+        y200Sun.append(A200Sun * Xi + B200Sun)
+        y300Sun.append(A300Sun * Xi + B300Sun)
+        y400Sun.append(A400Sun * Xi + B400Sun)
+        y500Sun.append(A500Sun * Xi + B500Sun)
+        y600Sun.append(A600Sun * Xi + B600Sun)
+        y700Sun.append(A700Sun * Xi + B700Sun)
+        y800Sun.append(A800Sun * Xi + B800Sun)
+        y900Sun.append(A900Sun * Xi + B900Sun)
+        y1000Sun.append(A1000Sun * Xi + B1000Sun)
+        y1100Sun.append(A1100Sun * Xi + B1100Sun)
+        y1200Sun.append(A1200Sun * Xi + B1200Sun)
+        y1300Sun.append(A1300Sun * Xi + B1300Sun)
+        y1400Sun.append(A1400Sun * Xi + B1400Sun)
+        y1500Sun.append(A1500Sun * Xi + B1500Sun)
+        y1600Sun.append(A1600Sun * Xi + B1600Sun)
+        y1700Sun.append(A1700Sun * Xi + B1700Sun)
+        y1800Sun.append(A1800Sun * Xi + B1800Sun)
+        y1900Sun.append(A1900Sun * Xi + B1900Sun)
+        y2000Sun.append(A2000Sun * Xi + B2000Sun)
+        y2100Sun.append(A2100Sun * Xi + B2100Sun)
+        y2200Sun.append(A2200Sun * Xi + B2200Sun)
+        y2300Sun.append(A2300Sun * Xi + B2300Sun)
+        y2400Sun.append(A2400Sun * Xi + B2400Sun)
+        y2500Sun.append(A2500Sun * Xi + B2500Sun)
+        y2600Sun.append(A2600Sun * Xi + B2600Sun)
+        y2700Sun.append(A2700Sun * Xi + B2700Sun)
+        y2800Sun.append(A2800Sun * Xi + B2800Sun)
+        y2900Sun.append(A2900Sun * Xi + B2900Sun)
+        y3000Sun.append(A3000Sun * Xi + B3000Sun)
+
+    plt.plot(x,y, marker='.', linestyle='None', color='black', markersize=2)
+
+    plt.plot(x, y100SK, label='100Ma SK', linestyle='dotted', color='firebrick')
+    plt.plot(x, y200SK, label='200Ma SK', linestyle='dotted', color='red')
+    plt.plot(x, y300SK, label='300Ma SK', linestyle='dotted', color='darksalmon')
+    plt.plot(x, y400SK, label='400Ma SK', linestyle='dotted', color='sienna')
+    plt.plot(x, y500SK, label='500Ma SK', linestyle='dotted', color='sandybrown')
+    plt.plot(x, y600SK, label='600Ma SK', linestyle='dotted', color='tan')
+    plt.plot(x, y700SK, label='700Ma SK', linestyle='dotted', color='moccasin')
+    plt.plot(x, y800SK, label='800Ma SK', linestyle='dotted', color='gold')
+    plt.plot(x, y900SK, label='900Ma SK', linestyle='dotted', color='darkkhaki')
+    plt.plot(x, y1000SK, label='1000Ma SK', linestyle='dotted', color='lightgoldenrodyellow')
+    plt.plot(x, y1100SK, label='1100Ma SK', linestyle='dotted', color='olivedrab')
+    plt.plot(x, y1200SK, label='1200Ma SK', linestyle='dotted', color='chartreuse')
+    plt.plot(x, y1300SK, label='1300Ma SK', linestyle='dotted', color='palegreen')
+    plt.plot(x, y1400SK, label='1400Ma SK', linestyle='dotted', color='darkgreen')
+    plt.plot(x, y1500SK, label='1500Ma SK', linestyle='dotted', color='seagreen')
+    plt.plot(x, y1600SK, label='1600Ma SK', linestyle='dotted', color='mediumspringgreen')
+    plt.plot(x, y1700SK, label='1700Ma SK', linestyle='dotted', color='lightseagreen')
+    plt.plot(x, y1800SK, label='1800Ma SK', linestyle='dotted', color='paleturquoise')
+    plt.plot(x, y1900SK, label='1900Ma SK', linestyle='dotted', color='darkcyan')
+    plt.plot(x, y2000SK, label='2000Ma SK', linestyle='dotted', color='darkturquoise')
+    plt.plot(x, y2100SK, label='2100Ma SK', linestyle='dotted', color='deepskyblue')
+    plt.plot(x, y2200SK, label='2200Ma SK', linestyle='dotted', color='royalblue')
+    plt.plot(x, y2300SK, label='2300Ma SK', linestyle='dotted', color='navy')
+    plt.plot(x, y2400SK, label='2400Ma SK', linestyle='dotted', color='blue')
+    plt.plot(x, y2500SK, label='2500Ma SK', linestyle='dotted', color='mediumpurple')
+    plt.plot(x, y2600SK, label='2600Ma SK', linestyle='dotted', color='darkorchid')
+    plt.plot(x, y2700SK, label='2700Ma SK', linestyle='dotted', color='plum')
+    plt.plot(x, y2800SK, label='2800Ma SK ', linestyle='dotted', color='m')
+    plt.plot(x, y2900SK, label='2900Ma SK', linestyle='dotted', color='mediumvioletred')
+    plt.plot(x, y3000SK, label='3000Ma SK ', linestyle='dotted', color='palevioletred')
+
+    plt.plot(x, y100Sun, label='100Ma Sun', color='firebrick')
+    plt.plot(x, y200Sun, label='200Ma Sun', color='red')
+    plt.plot(x, y300Sun, label='300Ma Sun', color='darksalmon')
+    plt.plot(x, y400Sun, label='400Ma Sun', color='sienna')
+    plt.plot(x, y500Sun, label='500Ma Sun', color='sandybrown')
+    plt.plot(x, y600Sun, label='600Ma Sun', color='tan')
+    plt.plot(x, y700Sun, label='700Ma Sun', color='moccasin')
+    plt.plot(x, y800Sun, label='800Ma Sun', color='gold')
+    plt.plot(x, y900Sun, label='900Ma Sun', color='darkkhaki')
+    plt.plot(x, y1000Sun, label='1000Ma Sun', color='lightgoldenrodyellow')
+    plt.plot(x, y1100Sun, label='1100Ma Sun', color='olivedrab')
+    plt.plot(x, y1200Sun, label='1200Ma Sun', color='chartreuse')
+    plt.plot(x, y1300Sun, label='1300Ma Sun', color='palegreen')
+    plt.plot(x, y1400Sun, label='1400Ma Sun', color='darkgreen')
+    plt.plot(x, y1500Sun, label='1500Ma Sun', color='seagreen')
+    plt.plot(x, y1600Sun, label='1600Ma Sun', color='mediumspringgreen')
+    plt.plot(x, y1700Sun, label='1700Ma Sun', color='lightseagreen')
+    plt.plot(x, y1800Sun, label='1800Ma Sun', color='paleturquoise')
+    plt.plot(x, y1900Sun, label='1900Ma Sun', color='darkcyan')
+    plt.plot(x, y2000Sun, label='2000Ma Sun', color='darkturquoise')
+    plt.plot(x, y2100Sun, label='2100Ma Sun', color='deepskyblue')
+    plt.plot(x, y2200Sun, label='2200Ma Sun', color='royalblue')
+    plt.plot(x, y2300Sun, label='2300Ma Sun', color='navy')
+    plt.plot(x, y2400Sun, label='2400Ma Sun', color='blue')
+    plt.plot(x, y2500Sun, label='2500Ma Sun', color='mediumpurple')
+    plt.plot(x, y2600Sun, label='2600Ma Sun', color='darkorchid')
+    plt.plot(x, y2700Sun, label='2700Ma Sun', color='plum')
+    plt.plot(x, y2800Sun, label='2800Ma Sun', color='m')
+    plt.plot(x, y2900Sun, label='2900Ma Sun', color='mediumvioletred')
+    plt.plot(x, y3000Sun, label='3000Ma Sun', color='palevioletred')
+
+    plt.xlabel('206Pb/204Pb')
+    plt.ylabel('207Pb/204Pb')
+    plt.title('Lead isotopes results and isochones from the Sun et al. (1996) and Stacey & Kramers (1975) models')
+
+    #size of the legend
+    fontP = FontProperties()
+    fontP.set_size('small')
+
+    #position of the legend, outside of the graph on the right
+    ax = plt.subplot(111)
+    box = ax.get_position()
+    ax.set_position([box.x0, box.y0, box.width * 0.85, box.height])
+    #legend on 2 columns
+    plt.legend(prop=fontP, bbox_to_anchor=(1, 1.1), ncol=2)
+    plt.axis([xmin - 0.05, xmax + 0.05, ymin - 0.02, ymax + 0.02])
+    plt.show()
+
+
+if __name__ == "__main__":
+    main()
+
